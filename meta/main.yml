@@ -3,6 +3,7 @@
 dependencies: []
 
 galaxy_info:
+  role_name: 'pkg_mirror'
   author: 'Adfinis SyGroup AG'
   description: 'Manage system package sources'
   company: 'Adfinis SyGroup AG'
