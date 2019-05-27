@@ -28,6 +28,8 @@
     repo_gpgcheck: '{{ item.repo_gpgcheck | default(omit) }}'
     gpgcheck: '{{ item.gpgcheck | default("yes") }}'
     gpgkey: '{{ item.gpgkey | default(omit) }}'
+    username: '{{ item.username | default(omit) }}'
+    password: '{{ item.password | default(omit) }}'
     enabled: yes
     state: present
     seuser: system_u
