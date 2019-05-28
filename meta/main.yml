@@ -29,5 +29,5 @@ galaxy_info:
     - dpkg
     - yum
     - rpm
-    - sources.list
+    - sources
     - repository
