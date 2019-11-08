@@ -10,6 +10,13 @@
   register: pkg_mirror_register_apt_repository
   when: ansible_os_family == 'Debian'
 
+- name: add apt keys
+  apt_key:
+    url: '{{ pkg_mirror_gpgkey_url }}'
+  when:
+    - ansible_os_family == 'Debian'
+    - pkg_mirror_gpgkey_url is defined
+
 - name: pkg_mirror reload apt cache
   apt:
     update_cache: yes
