@@ -10,6 +10,26 @@
     - 'role::pkg_mirror:install'
     - 'role::pkg_mirror:config'
 
+- name: set package url list debian
+  set_fact:
+      pkg_mirror_url_list: '{{ pkg_mirror_url_list_debian }}'
+  when:
+    - pkg_mirror_url_list_debian | length > 0
+    - ansible_os_family == 'Debian'
+  tags:
+    - 'role::pkg_mirror'
+    - 'role::pkg_mirror:install'
+
+- name: set package url list redhat
+  set_fact:
+      pkg_mirror_url_list: '{{ pkg_mirror_url_list_redhat }}'
+  when:
+    - pkg_mirror_url_list_redhat | length > 0
+    - ansible_os_family == 'Redhat'
+  tags:
+    - 'role::pkg_mirror'
+    - 'role::pkg_mirror:install'
+
 - import_tasks: installation.yml
   tags:
     - 'role::pkg_mirror'
