@@ -45,3 +45,8 @@
     selevel: s0
   with_items: '{{ pkg_mirror_url_list }}'
   when: ansible_os_family == 'RedHat'
+
+- name: configure zypper repositories
+  include_tasks: '{{ role_path }}/tasks/suse-repository.yml'
+  with_items: '{{ pkg_mirror_url_list_suse }}'
+  when: ansible_os_family == 'Suse'
