@@ -12,7 +12,7 @@
 
 - name: set package url list debian
   set_fact:
-      pkg_mirror_url_list: '{{ pkg_mirror_url_list_debian }}'
+    pkg_mirror_url_list: '{{ pkg_mirror_url_list_debian }}'
   when:
     - pkg_mirror_url_list_debian | length > 0
     - ansible_os_family == 'Debian'
@@ -22,7 +22,7 @@
 
 - name: set package url list redhat
   set_fact:
-      pkg_mirror_url_list: '{{ pkg_mirror_url_list_redhat }}'
+    pkg_mirror_url_list: '{{ pkg_mirror_url_list_redhat }}'
   when:
     - pkg_mirror_url_list_redhat | length > 0
     - ansible_os_family == 'RedHat'
