@@ -19,4 +19,4 @@
   zypper_repository:
     repo: '{{ item.repo }}'
   when:
-  - not pkg_mirror_register_icinga_suse_repo_stat.stat.exists
+    - not pkg_mirror_register_icinga_suse_repo_stat.stat.exists
