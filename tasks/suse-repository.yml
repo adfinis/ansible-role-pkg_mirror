@@ -1,8 +1,8 @@
 - name: fetch suse repo file
   uri:
     url: '{{ item.repo }}'
-    return_content: yes
-  check_mode: no
+    return_content: true
+  check_mode: false
   register: pkg_mirror_register_suse_repo_file
 
 - name: parse suse repo file
@@ -12,11 +12,11 @@
 - name: check if suse repository already exists
   stat:
     path: /etc/zypp/repos.d/{{ pkg_mirror_icinga_suse_repo_name }}.repo
-  check_mode: no
+  check_mode: false
   register: pkg_mirror_register_icinga_suse_repo_stat
 
 - name: configure suse repository
   zypper_repository:
     repo: '{{ item.repo }}'
   when:
-  - not pkg_mirror_register_icinga_suse_repo_stat.stat.exists
+    - not pkg_mirror_register_icinga_suse_repo_stat.stat.exists

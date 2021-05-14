@@ -19,7 +19,7 @@
 
 - name: pkg_mirror reload apt cache
   apt:
-    update_cache: yes
+    update_cache: true
   tags:
     - skip_ansible_lint
   when: pkg_mirror_register_apt_repository is defined and
@@ -37,7 +37,7 @@
     gpgkey: '{{ item.gpgkey | default(omit) }}'
     username: '{{ item.username | default(omit) }}'
     password: '{{ item.password | default(omit) }}'
-    enabled: yes
+    enabled: true
     state: present
     seuser: system_u
     serole: object_r
