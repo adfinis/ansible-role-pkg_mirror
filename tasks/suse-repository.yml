@@ -16,7 +16,15 @@
   register: pkg_mirror_register_icinga_suse_repo_stat
 
 - name: configure suse repository
-  zypper_repository:
-    repo: '{{ item.repo }}'
+  copy:
+    dest: /etc/zypp/repos.d/{{ pkg_mirror_icinga_suse_repo_name }}.repo
+    content: "{{ pkg_mirror_register_suse_repo_file.content }}"
+  when:
+    - not pkg_mirror_register_icinga_suse_repo_stat.stat.exists
+
+- name: update suse repo key
+  ansible.builtin.rpm_key:
+    state: present
+    key: "{{ pkg_mirror_register_suse_repo_file.content.splitlines()[5][7:] }}"
   when:
     - not pkg_mirror_register_icinga_suse_repo_stat.stat.exists
