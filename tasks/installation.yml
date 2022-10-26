@@ -12,7 +12,6 @@
     state: present
   when: ansible_os_family == 'Debian'
 
-
 - name: install pkg_mirror packages
   package:
     name: '{{ pkg_mirror_packages }}'
