@@ -24,7 +24,7 @@ jobs:
           path: lint-rules
 
       - name: ansible-lint
-        uses: ansible/ansible-lint-action@main
+        uses: ansible/ansible-lint@main
         with:
           targets: pkg_mirror
           args: "-R -r lint-rules"
