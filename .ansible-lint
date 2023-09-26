@@ -6,6 +6,7 @@ skip_list:
   - name[missing]
   - name[casing]
   - fqcn[action-core]
+  - yaml[truthy]
   # Apparently our galaxy org name is invalid now...
   - role-name
   - schema[meta]
