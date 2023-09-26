@@ -2,7 +2,13 @@
 # .ansible-lint
 
 skip_list:
+  # Will be migrated in due time
+  - name[missing]
+  - name[casing]
+  - fqcn[action-core]
+  # Apparently our galaxy org name is invalid now...
   - role-name
+  - schema[meta]
 
 exclude_paths:
   - tests/
