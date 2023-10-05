@@ -1,3 +1,5 @@
+---
+
 - name: fetch suse repo file
   uri:
     url: '{{ item.repo }}'
