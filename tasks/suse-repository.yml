@@ -1,22 +1,23 @@
-- name: fetch suse repo file
-  uri:
+---
+- name: Fetch suse repo file
+  ansible.builtin.uri:
     url: '{{ item.repo }}'
-    return_content: yes
-  check_mode: no
+    return_content: true
+  check_mode: false
   register: pkg_mirror_register_suse_repo_file
 
-- name: parse suse repo file
-  set_fact:
+- name: Parse suse repo file
+  ansible.builtin.set_fact:
     pkg_mirror_icinga_suse_repo_name: '{{ pkg_mirror_register_suse_repo_file.content.splitlines()[0][1:-1] }}'
 
-- name: check if suse repository already exists
-  stat:
+- name: Check if suse repository already exists
+  ansible.legacy.stat:
     path: /etc/zypp/repos.d/{{ pkg_mirror_icinga_suse_repo_name }}.repo
-  check_mode: no
+  check_mode: false
   register: pkg_mirror_register_icinga_suse_repo_stat
 
-- name: configure suse repository
-  zypper_repository:
+- name: Configure suse repository
+  community.general.zypper_repository:
     repo: '{{ item.repo }}'
   when:
     - not pkg_mirror_register_icinga_suse_repo_stat.stat.exists

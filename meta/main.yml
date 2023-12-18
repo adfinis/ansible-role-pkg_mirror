@@ -22,8 +22,8 @@ galaxy_info:
         - bionic
     - name: EL
       versions:
-        - 6
-        - 7
+        - "6"
+        - "7"
   galaxy_tags:
     - apt
     - dpkg

@@ -1,43 +1,43 @@
 ---
 
-- name: configure apt repository
-  template:
+- name: Configure apt repository
+  ansible.builtin.template:
     src: etc/apt/sources.list.j2
     dest: '{{ pkg_mirror_sources_file }}'
     owner: root
     group: root
-    mode: 0644
+    mode: "0644"
   register: pkg_mirror_register_apt_repository
   when: ansible_os_family == 'Debian'
 
-- name: add apt keys
-  apt_key:
+- name: Add apt keys
+  ansible.builtin.apt_key:
     url: '{{ pkg_mirror_gpgkey_url }}'
   when:
     - ansible_os_family == 'Debian'
     - pkg_mirror_gpgkey_url is defined
 
-- name: pkg_mirror reload apt cache
-  apt:
-    update_cache: yes
+- name: Pkg_mirror reload apt cache
+  ansible.builtin.apt:
+    update_cache: true
   tags:
     - skip_ansible_lint
   when: pkg_mirror_register_apt_repository is defined and
         pkg_mirror_register_apt_repository.changed
 
-- name: configure yum repository
-  yum_repository:
+- name: Configure yum repository
+  ansible.builtin.yum_repository:
     name: '{{ item.name }}'
     file: '{{ item.file | default(item.name) }}'
     description: '{{ item.description }}'
     baseurl: '{{ item.baseurl | default(omit) }}'
     mirrorlist: '{{ item.mirrorlist | default(omit) }}'
     repo_gpgcheck: '{{ item.repo_gpgcheck | default(omit) }}'
-    gpgcheck: '{{ item.gpgcheck | default("yes") }}'
+    gpgcheck: '{{ item.gpgcheck | default("true") }}'
     gpgkey: '{{ item.gpgkey | default(omit) }}'
     username: '{{ item.username | default(omit) }}'
     password: '{{ item.password | default(omit) }}'
-    enabled: yes
+    enabled: true
     state: present
     seuser: system_u
     serole: object_r
@@ -46,7 +46,7 @@
   with_items: '{{ pkg_mirror_url_list }}'
   when: ansible_os_family == 'RedHat'
 
-- name: configure zypper repositories
-  include_tasks: '{{ role_path }}/tasks/suse-repository.yml'
+- name: Configure zypper repositories
+  ansible.builtin.include_tasks: '{{ role_path }}/tasks/suse-repository.yml'
   with_items: '{{ pkg_mirror_url_list_suse }}'
   when: ansible_os_family == 'Suse'
