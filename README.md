@@ -4,7 +4,7 @@ ansible.pkg_mirror
 [![](https://img.shields.io/github/license/adfinis/ansible-role-pkg_mirror.svg?style=flat-square)](https://github.com/adfinis-sygroup/ansible-role-pkg_mirror/blob/master/LICENSE)
 [![](https://img.shields.io/badge/galaxy-adfinis.pkg_mirror-660198.svg?style=flat-square)](https://galaxy.ansible.com/adfinis-sygroup/pkg_mirror)
 
-Configures the package mirror from adfinis.
+Manage system package source
 
 
 ## Requirements
@@ -14,7 +14,27 @@ Configures the package mirror from adfinis.
 
 ## Role Variables
 
--
+```yaml
+pkg_mirror_gpgkey_url: '<gpg url>'
+pkg_mirror_sources_file: /etc/apt/sources.list.d/<filename>.list
+pkg_mirror_url_list_debian:
+ - 'deb <repo url>/{{ ansible_distribution | lower }}/ {{ ansible_distribution_release }} main'
+
+pkg_mirror_url_list_redhat:
+ - name: '<repo name>'
+   description: '<repo description>'
+   baseurl: '<repo url>'
+   gpgcheck: yes
+   gpgkey: '<gpg url>'
+   username: '<basic auth user>'
+   password: '<basic auth pass>'
+
+pkg_mirror_url_list_suse:
+ - name: '<repo name>'
+   description: '<repo description>'
+   repo: '<repo url>'
+```
+
 
 
 ## Dependencies
