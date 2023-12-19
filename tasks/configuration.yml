@@ -1,9 +1,8 @@
 ---
-
 - name: Configure apt repository
   ansible.builtin.template:
     src: etc/apt/sources.list.j2
-    dest: '{{ pkg_mirror_sources_file }}'
+    dest: "{{ pkg_mirror_sources_file }}"
     owner: root
     group: root
     mode: "0644"
@@ -12,7 +11,7 @@
 
 - name: Add apt keys
   ansible.builtin.apt_key:
-    url: '{{ pkg_mirror_gpgkey_url }}'
+    url: "{{ pkg_mirror_gpgkey_url }}"
   when:
     - ansible_os_family == 'Debian'
     - pkg_mirror_gpgkey_url is defined
@@ -22,31 +21,30 @@
     update_cache: true
   tags:
     - skip_ansible_lint
-  when: pkg_mirror_register_apt_repository is defined and
-        pkg_mirror_register_apt_repository.changed
+  when: pkg_mirror_register_apt_repository is defined and pkg_mirror_register_apt_repository.changed
 
 - name: Configure yum repository
   ansible.builtin.yum_repository:
-    name: '{{ item.name }}'
-    file: '{{ item.file | default(item.name) }}'
-    description: '{{ item.description }}'
-    baseurl: '{{ item.baseurl | default(omit) }}'
-    mirrorlist: '{{ item.mirrorlist | default(omit) }}'
-    repo_gpgcheck: '{{ item.repo_gpgcheck | default(omit) }}'
+    name: "{{ item.name }}"
+    file: "{{ item.file | default(item.name) }}"
+    description: "{{ item.description }}"
+    baseurl: "{{ item.baseurl | default(omit) }}"
+    mirrorlist: "{{ item.mirrorlist | default(omit) }}"
+    repo_gpgcheck: "{{ item.repo_gpgcheck | default(omit) }}"
     gpgcheck: '{{ item.gpgcheck | default("true") }}'
-    gpgkey: '{{ item.gpgkey | default(omit) }}'
-    username: '{{ item.username | default(omit) }}'
-    password: '{{ item.password | default(omit) }}'
+    gpgkey: "{{ item.gpgkey | default(omit) }}"
+    username: "{{ item.username | default(omit) }}"
+    password: "{{ item.password | default(omit) }}"
     enabled: true
     state: present
     seuser: system_u
     serole: object_r
     setype: system_conf_t
     selevel: s0
-  with_items: '{{ pkg_mirror_url_list }}'
+  with_items: "{{ pkg_mirror_url_list }}"
   when: ansible_os_family == 'RedHat'
 
 - name: Configure zypper repositories
-  ansible.builtin.include_tasks: '{{ role_path }}/tasks/suse-repository.yml'
-  with_items: '{{ pkg_mirror_url_list_suse }}'
+  ansible.builtin.include_tasks: "{{ role_path }}/tasks/suse-repository.yml"
+  with_items: "{{ pkg_mirror_url_list_suse }}"
   when: ansible_os_family == 'Suse'

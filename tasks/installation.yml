@@ -1,5 +1,4 @@
 ---
-
 - name: Update apt cache
   ansible.builtin.apt:
     update_cache: true
@@ -8,5 +7,5 @@
 
 - name: Install pkg_mirror packages
   ansible.builtin.package:
-    name: '{{ pkg_mirror_packages }}'
+    name: "{{ pkg_mirror_packages }}"
     state: present

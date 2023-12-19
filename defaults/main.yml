@@ -2,19 +2,16 @@
 
 # package mirror url list
 # default is defined in vars
-pkg_mirror_url_list: '{{ pkg_mirror_url_list_default }}'
+pkg_mirror_url_list: "{{ pkg_mirror_url_list_default }}"
 
 # package mirror url list (debian specific)
 # overwrites 'pkg_mirror_url_list'
 pkg_mirror_url_list_debian: []
-
 # package mirror url list (redhat specific)
 # overwrites 'pkg_mirror_url_list'
 pkg_mirror_url_list_redhat: []
-
 # package mirror url list (suse specific)
 pkg_mirror_url_list_suse: []
-
 # package mirror list filename
 # default is defined in vars
-pkg_mirror_sources_file: '{{ pkg_mirror_sources_file_default }}'
+pkg_mirror_sources_file: "{{ pkg_mirror_sources_file_default }}"
