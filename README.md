@@ -2,6 +2,7 @@ ansible.pkg_mirror
 ===
 
 [![](https://img.shields.io/github/license/adfinis/ansible-role-pkg_mirror.svg?style=flat-square)](https://github.com/adfinis-sygroup/ansible-role-pkg_mirror/blob/master/LICENSE)
+[![](https://img.shields.io/travis/adfinis/ansible-role-pkg_mirror.svg?style=flat-square)](https://travis-ci.org/adfinis/ansible-role-pkg_mirror)
 [![](https://img.shields.io/badge/galaxy-adfinis.pkg_mirror-660198.svg?style=flat-square)](https://galaxy.ansible.com/adfinis-sygroup/pkg_mirror)
 
 Manage system package source
