@@ -5,7 +5,7 @@ ansible.pkg_mirror
 [![image](https://img.shields.io/github/actions/workflow/status/adfinis/ansible-role-pkg_mirror/ansible-ci.yml?style=flat-square)](https://github.com/adfinis/ansible-role-pkg_mirror/actions)
 [![](https://img.shields.io/badge/galaxy-adfinis.pkg_mirror-660198.svg?style=flat-square)](https://galaxy.ansible.com/adfinis/pkg_mirror)
 
-Manage system package source
+Manage system package sources
 
 
 ## Requirements
