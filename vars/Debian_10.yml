@@ -8,12 +8,12 @@ pkg_mirror_packages:
 
 # pkg-mirror
 pkg_mirror_url_list_default:
-  - 'deb https://pkg.adfinis.com/{{ ansible_distribution | lower }}/ {{ ansible_distribution_release | lower }} main contrib non-free'
-  - 'deb-src https://pkg.adfinis.com/{{ ansible_distribution | lower }}/ {{ ansible_distribution_release | lower }} main non-free contrib'
-  - 'deb http://security.debian.org/ {{ ansible_distribution_release | lower }}/updates main contrib non-free'
-  - 'deb-src https://security.debian.org/ {{ ansible_distribution_release | lower }}/updates main contrib non-free'
-  - 'deb https://pkg.adfinis.com/{{ ansible_distribution | lower }}/ {{ ansible_distribution_release | lower }}-updates main contrib non-free'
-  - 'deb-src https://pkg.adfinis.com/{{ ansible_distribution | lower }}/ {{ ansible_distribution_release | lower }}-updates main contrib non-free'
+  - deb https://pkg.adfinis.com/{{ ansible_distribution | lower }}/ {{ ansible_distribution_release | lower }} main contrib non-free
+  - deb-src https://pkg.adfinis.com/{{ ansible_distribution | lower }}/ {{ ansible_distribution_release | lower }} main non-free contrib
+  - deb http://security.debian.org/ {{ ansible_distribution_release | lower }}/updates main contrib non-free
+  - deb-src https://security.debian.org/ {{ ansible_distribution_release | lower }}/updates main contrib non-free
+  - deb https://pkg.adfinis.com/{{ ansible_distribution | lower }}/ {{ ansible_distribution_release | lower }}-updates main contrib non-free
+  - deb-src https://pkg.adfinis.com/{{ ansible_distribution | lower }}/ {{ ansible_distribution_release | lower }}-updates main contrib non-free
 
 # sources filename
 pkg_mirror_sources_file_default: /etc/apt/sources.list

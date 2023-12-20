@@ -2,6 +2,5 @@
 
 # pkg-mirror packages
 pkg_mirror_packages: []
-
 # pkg-mirror
 pkg_mirror_url_list_default: []
