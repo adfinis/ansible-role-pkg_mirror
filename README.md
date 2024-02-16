@@ -24,7 +24,7 @@ pkg_mirror_url_list_redhat:
  - name: '<repo name>'
    description: '<repo description>'
    baseurl: '<repo url>'
-   gpgcheck: yes
+   gpgcheck: true
    gpgkey: '<gpg url>'
    username: '<basic auth user>'
    password: '<basic auth pass>'
