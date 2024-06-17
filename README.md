@@ -22,9 +22,9 @@ pkg_mirror_sources_file: /etc/apt/sources.list.d/<filename>.list
 pkg_mirror_url_list_debian:
  - 'deb <repo url>/{{ ansible_distribution | lower }}/ {{ ansible_distribution_release }} main'
 pkg_mirror_auth_entries:
-    - auth_machine: <repo hostname>
-      auth_login: <repo username>
-      auth_password: <repo password>
+ - auth_machine: <repo hostname>
+   auth_login: <repo username>
+   auth_password: <repo password>
 
 pkg_mirror_url_list_redhat:
  - name: '<repo name>'
