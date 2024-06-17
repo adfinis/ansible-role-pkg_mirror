@@ -21,7 +21,7 @@
 - name: Configure auth for pkg mirror
   ansible.builtin.template:
     src: "etc/apt/auth.conf.j2"
-    dest: "/etc/apt/auth.conf.d/{{ auth_machine }}.conf"
+    dest: "/etc/apt/auth.conf.d/{{ item.auth_machine }}.conf"
     mode: "0644"
   with_items: "{{ pkg_mirror_auth_entries }}"
   when:
