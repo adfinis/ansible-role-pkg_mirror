@@ -9,9 +9,11 @@
   register: pkg_mirror_register_apt_repository
   when: ansible_os_family == 'Debian'
 
-- name: Add apt keys
-  ansible.builtin.apt_key:
+- name: Download apt key
+  ansible.builtin.get_url:
     url: "{{ pkg_mirror_gpgkey_url }}"
+    dest: "/etc/apt/keyrings/{{ pkg_mirror_gpgkey_url | basename }}"
+    mode: "0644"
   when:
     - ansible_os_family == 'Debian'
     - pkg_mirror_gpgkey_url is defined
