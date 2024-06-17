@@ -3,7 +3,7 @@
 
 {% for line in pkg_mirror_url_list %}
 {% if pkg_mirror_gpgkey_url is defined %}
-deb [signed-by=/etc/apt/keyrings/{{ pkg_mirror_gpgkey_url | basename }}] {{ line | regex_replace('^deb ', '') }}
+deb [signed-by=/etc/apt/trusted.gpg.d/{{ pkg_mirror_gpgkey_url | basename }}] {{ line | regex_replace('^deb ', '') }}
 {% else %}
 {{ line }}
 {% endif %}
