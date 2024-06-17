@@ -5,6 +5,6 @@
 {% if pkg_mirror_gpgkey_url is defined %}
 deb [signed-by=/etc/apt/keyrings/{{ pkg_mirror_gpgkey_url | basename }}] {{ line | regex_replace('^deb ', '') }}
 {% else %}
-{{ line }
+{{ line }}
 {% endif %}
 {% endfor %}
