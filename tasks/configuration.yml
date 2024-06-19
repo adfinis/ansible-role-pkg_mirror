@@ -9,19 +9,35 @@
   register: pkg_mirror_register_apt_repository
   when: ansible_os_family == 'Debian'
 
-- name: Add apt keys
-  ansible.builtin.apt_key:
+- name: Download apt key
+  ansible.builtin.get_url:
     url: "{{ pkg_mirror_gpgkey_url }}"
+    dest: "{{ pkg_mirror_gpg_directory }}/{{ pkg_mirror_gpgkey_url | basename }}"
+    mode: "0644"
+  register: pkg_mirror_download_apt_key
   when:
     - ansible_os_family == 'Debian'
     - pkg_mirror_gpgkey_url is defined
+
+- name: Configure auth for pkg mirror
+  ansible.builtin.template:
+    src: "etc/apt/auth.conf.j2"
+    dest: "/etc/apt/auth.conf.d/{{ item.auth_machine }}.conf"
+    mode: "0600"
+  register: pkg_mirror_register_auth
+  with_items: "{{ pkg_mirror_auth_entries }}"
+  when:
+    - ansible_os_family == 'Debian'
+    - pkg_mirror_auth_entries | length > 0
 
 - name: Pkg_mirror reload apt cache
   ansible.builtin.apt:
     update_cache: true
   tags:
     - skip_ansible_lint
-  when: pkg_mirror_register_apt_repository is defined and pkg_mirror_register_apt_repository.changed
+  when: (pkg_mirror_register_apt_repository is defined and pkg_mirror_register_apt_repository.changed) or
+        (pkg_mirror_register_auth is defined and pkg_mirror_register_auth.changed) or
+        (pkg_mirror_download_apt_key is defined and pkg_mirror_download_apt_key.changed)
 
 - name: Configure yum repository
   ansible.builtin.yum_repository:

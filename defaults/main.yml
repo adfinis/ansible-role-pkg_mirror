@@ -15,3 +15,8 @@ pkg_mirror_url_list_suse: []
 # package mirror list filename
 # default is defined in vars
 pkg_mirror_sources_file: "{{ pkg_mirror_sources_file_default }}"
+# trusted gpg directory
+# default is defined in vars
+pkg_mirror_gpg_directory: "{{ pkg_mirror_gpg_directory_default }}"
+# apt auth config entries
+pkg_mirror_auth_entries: []
