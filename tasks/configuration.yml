@@ -1,4 +1,22 @@
 ---
+
+- name: Configure apt repository
+  ansible.builtin.deb822_repository:
+    name: "{{ item.name }}"
+    types: "{{ item.types | default(['deb']) }}"
+    uris: "{{ item.url }}"
+    suites: "{{ item.suite }}"
+    components: "{{ item.components }}"
+    signed_by: "{{ item.signed_by }}"
+    owner: root
+    group: root
+    mode: "0644"
+  loop: "pkg_mirror_url_list"
+  register: pkg_mirror_register_apt_repository
+  when:
+    - ansible_os_family == 'Debian'
+    - ansible_distribution_major_version | int >= 13
+
 - name: Configure apt repository
   ansible.builtin.template:
     src: etc/apt/sources.list.j2
@@ -7,7 +25,9 @@
     group: root
     mode: "0644"
   register: pkg_mirror_register_apt_repository
-  when: ansible_os_family == 'Debian'
+  when:
+    - ansible_os_family == 'Debian'
+    - ansible_distribution_major_version | int < 13
 
 - name: Download apt key
   ansible.builtin.get_url:
@@ -17,6 +37,7 @@
   register: pkg_mirror_download_apt_key
   when:
     - ansible_os_family == 'Debian'
+    - ansible_distribution_major_version | int < 13
     - pkg_mirror_gpgkey_url is defined
 
 - name: Configure auth for pkg mirror

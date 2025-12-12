@@ -2,9 +2,11 @@
 # {{ pkg_mirror_sources_file }}
 
 {% for line in pkg_mirror_url_list %}
+{% for type in line.types | default(['deb']) %}
 {% if pkg_mirror_gpgkey_url is defined %}
-deb [signed-by={{ pkg_mirror_gpg_directory }}/{{ pkg_mirror_gpgkey_url | basename }}] {{ line | regex_replace('^deb ', '') }}
+{{ type }} [signed-by={{ pkg_mirror_gpg_directory }}/{{ pkg_mirror_gpgkey_url | basename }}] {{ line.url }} {{ line.suite }} {{ line.components | join(' ') }}
 {% else %}
-{{ line }}
+{{ type }} {{ line.url }} {{ line.suite }} {{ line.components | join(' ') }}
 {% endif %}
+{% endfor %}
 {% endfor %}
