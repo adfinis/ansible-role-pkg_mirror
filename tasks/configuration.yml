@@ -8,10 +8,8 @@
     suites: "{{ item.suite }}"
     components: "{{ item.components }}"
     signed_by: "{{ item.signed_by }}"
-    owner: root
-    group: root
     mode: "0644"
-  loop: "pkg_mirror_url_list"
+  loop: "{{ pkg_mirror_url_list }}"
   register: pkg_mirror_register_apt_repository
   when:
     - ansible_os_family == 'Debian'
