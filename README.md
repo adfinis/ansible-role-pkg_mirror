@@ -20,7 +20,11 @@ pkg_mirror_gpgkey_url: '<gpg url>'
 pkg_mirror_gpg_directory: '<apt trusted gpg directory>'
 pkg_mirror_sources_file: /etc/apt/sources.list.d/<filename>.list
 pkg_mirror_url_list_debian:
- - 'deb <repo url>/{{ ansible_distribution | lower }}/ {{ ansible_distribution_release }} main'
+ - name: debian
+   types: [deb, deb-src]
+   url: "<repo url>/{{ ansible_distribution | lower }}/"
+   suite: "{{ ansible_distribution_release }}"
+   components: [main]
 pkg_mirror_auth_entries:
  - auth_machine: <repo hostname>
    auth_login: <repo username>
