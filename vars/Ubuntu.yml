@@ -3,8 +3,8 @@
 # pkg-mirror packages
 pkg_mirror_packages:
   - apt-transport-https
-  - python-apt
   - ca-certificates
+  - python3-debian
 
 # pkg-mirror
 pkg_mirror_url_list_default:

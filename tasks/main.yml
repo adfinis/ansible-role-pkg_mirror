@@ -3,6 +3,7 @@
   ansible.builtin.include_vars: "{{ item }}"
   with_first_found:
     - "{{ ansible_distribution }}_{{ ansible_distribution_major_version }}.yml"
+    - "{{ ansible_distribution }}.yml"
     - "{{ ansible_os_family }}.yml"
   tags:
     - role::pkg_mirror
