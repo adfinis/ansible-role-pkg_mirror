@@ -1,6 +1,6 @@
 ---
 
-- name: Configure apt repository
+- name: Configure apt repository for Debian 13 or higher and Ubuntu
   ansible.builtin.deb822_repository:
     name: "{{ item.name }}"
     types: "{{ item.types | default(['deb']) }}"
@@ -15,7 +15,7 @@
     - ansible_os_family == 'Debian'
     - ansible_distribution_major_version | int >= 13
 
-- name: Configure apt repository
+- name: Configure apt repository for Debian 12 or lower
   ansible.builtin.template:
     src: etc/apt/sources.list.j2
     dest: "{{ pkg_mirror_sources_file }}"
@@ -27,7 +27,7 @@
     - ansible_os_family == 'Debian'
     - ansible_distribution_major_version | int < 13
 
-- name: Download apt key
+- name: Download apt key for Debian 12 or lower
   ansible.builtin.get_url:
     url: "{{ pkg_mirror_gpgkey_url }}"
     dest: "{{ pkg_mirror_gpg_directory }}/{{ pkg_mirror_gpgkey_url | basename }}"
